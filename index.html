@@ -8,10 +8,41 @@
 <body>
   <h1>fishfly</h1>
   <p>Short biography videos about famous people worldwide.</p>
+
+  <!-- TikTok Login Button -->
+  <p>
+    <a id="ttLogin"
+       style="display:inline-block;padding:12px 18px;border-radius:10px;background:#fe2c55;color:#fff;text-decoration:none;font-weight:600;">
+      Login with TikTok
+    </a>
+  </p>
+
   <ul>
     <li><a href="terms.html">Terms of Service</a></li>
     <li><a href="privacy.html">Privacy Policy</a></li>
   </ul>
+
   <p>Contact: <a href="mailto:ffish0711@gmail.com">ffish0711@gmail.com</a></p>
+
+  <script>
+    const clientKey = "aw0ucq9uhk8lwz8b";
+    const redirectUri = "https://fishfly-tiktok-login.ffish0711.workers.dev/auth/tiktok/callback";
+    const scope = "user.info.basic";
+
+    const state = Array.from(crypto.getRandomValues(new Uint8Array(16)))
+      .map(b => b.toString(16).padStart(2, "0")).join("");
+
+    const authUrl =
+      "https://www.tiktok.com/v2/auth/authorize/?" +
+      new URLSearchParams({
+        client_key: clientKey,
+        response_type: "code",
+        scope,
+        redirect_uri: redirectUri,
+        state
+      }).toString();
+
+    document.getElementById("ttLogin").href = authUrl;
+  </script>
 </body>
 </html>
